@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Carga;
 use Illuminate\Http\Request;
+use App\Tabulacion;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class CargaController extends Controller
@@ -25,7 +26,9 @@ class CargaController extends Controller
      */
     public function create()
     {
-        //
+
+        $tabulacion = Tabulacion::all(['id','municipio']);
+        return view('carga.create',['municipios' => $tabulacion]);
     }
 
     /**

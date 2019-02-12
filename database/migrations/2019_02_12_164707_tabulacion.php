@@ -15,7 +15,11 @@ class Tabulacion extends Migration
     {
         Schema::create('tabulacion', function (Blueprint $table) {
             $table->increments('id');
-            $table->
+            $table->string('municipio');
+            $table->string('electores');
+            $table->string('porcentaje');
+            $table->string('cuadernillo');
+            $table->string('firmas');
             $table->timestamps();
         });
     }

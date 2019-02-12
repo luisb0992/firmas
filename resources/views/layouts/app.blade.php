@@ -73,6 +73,12 @@
               <p>Municipios</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::segment(1) === 'cargas' ? 'active' : null }}">
+            <a class="nav-link" href="{{ route('cargas.create') }}">
+              <i class="material-icons">maps</i>
+              <p>Carga De Datos</p>
+            </a>
+          </li>
 
         </ul>
       </div>

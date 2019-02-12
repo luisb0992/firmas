@@ -15,7 +15,7 @@ class SectorController extends Controller
      */
     public function index()
     {
-        //
+        return view("municipios.index", ["muni" => Sector::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class SectorController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +36,24 @@ class SectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+          'municipio' => 'required|unique:sectores,municipio'
+        ]);
+
+        $muni = new Sector($request->all());
+
+        if($muni->save()){
+            return redirect("sectores")->with([
+              'flash_message' => 'Municipio agregado correctamente.',
+              'flash_class'   => 'alert-success'
+            ]);
+        }else{
+            return redirect("sectores")->with([
+              'flash_message'   => 'Ha ocurrido un error.',
+              'flash_class'     => 'alert-danger'
+            ]);
+        }
+
     }
 
     /**

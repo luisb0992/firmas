@@ -67,7 +67,7 @@
             </a>
           </li>
 
-          <li class="nav-item {{ Request::segment(1) === 'sectores' ? 'active' : null }}">
+          <li class="nav-item {{ Request::segment(1) === 'sectores' ? 'active' : null }} ">
             <a class="nav-link" href="{{ route('sectores.index') }}">
               <i class="material-icons">maps</i>
               <p>Municipios</p>

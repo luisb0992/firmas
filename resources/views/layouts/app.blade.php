@@ -40,7 +40,7 @@
       data-background-color = "black | white"
     -->
     <!-- sidebar -->
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="{{ asset('img/sidebar-3.jpg') }}">
+    <div class="sidebar" data-color="danger" data-background-color="black" data-image="{{ asset('img/sidebar-3.jpg') }}">
 
       <!-- logo -->
       <div class="logo">
@@ -70,7 +70,7 @@
           <li class="nav-item {{ Request::segment(1) === 'sectores' ? 'active' : null }}">
             <a class="nav-link" href="{{ route('sectores.index') }}">
               <i class="material-icons">maps</i>
-              <p>Sectores</p>
+              <p>Municipios</p>
             </a>
           </li>
 

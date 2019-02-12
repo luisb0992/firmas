@@ -85,9 +85,26 @@ class SectorController extends Controller
      * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sector $sector)
+    public function update(Request $request, Sector $sector, $id)
     {
-        //
+        $this->validate($request, [
+          'municipio' => 'required|unique:sectores,municipio,'.$id.',id'
+        ]);
+
+        $muni = Sector::findOrFail($id);
+        $muni->fill($request->all());
+
+        if($muni->save()){
+            return redirect("sectores")->with([
+              'flash_message' => 'Municipio actualizado correctamente.',
+              'flash_class'   => 'alert-success'
+            ]);
+        }else{
+            return redirect("sectores")->with([
+              'flash_message'   => 'Ha ocurrido un error.',
+              'flash_class'     => 'alert-danger'
+            ]);
+        }
     }
 
     /**
@@ -96,8 +113,13 @@ class SectorController extends Controller
      * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sector $sector)
+    public function destroy($id)
     {
-        //
+        if (Sector::destroy($id)) {
+          return redirect("sectores")->with([
+            'flash_message' => 'Municipio eliminado correctamente.',
+            'flash_class'   => 'alert-success'
+          ]);
+        }
     }
 }

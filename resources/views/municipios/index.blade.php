@@ -47,25 +47,23 @@
 						<thead class="text-danger">
 							<th>#</th>
 							<th>Nombre</th>
-							<th><i class="fa fa-cogs"></i></th>
+							<th><i class="fa fa-cogs"></i> utilidades</th>
 						</thead>
 						<tbody>
 							@foreach($muni as $d)
+              @include("municipios.modals.edit_muni")
 								<tr>
 									<td>{{ $loop->index+1 }}</td>
 									<td>{{ $d->municipio }}</td>
 									<td>
-										<a class="btn btn-primary btn-round btn-sm" href="{{ route('sectores.show', $d->id)}}" rel="tooltip" data-placement="top" title="ver">
-											<i class="material-icons">person</i>
-										</a>
-										<a href="{{ route('sectores.edit',[$d->id]) }}" class="btn btn-round btn-warning btn-sm" rel="tooltip" data-placement="top" title="Editar">
+										<a href="#edit_muni_{{ $d->id }}" data-toggle="modal" data-target="#edit_muni_{{ $d->id }}" class="btn btn-round btn-warning btn-sm" rel="tooltip" data-placement="top" title="Editar">
 											<i class="material-icons">edit</i>
 										</a>
 										<a class="btn btn-round btn-danger btn-sm" href="{{ route('sectores.destroy', $d->id) }}"
 											 onclick="event.preventDefault(); document.getElementById('delete_user').submit();" rel="tooltip" data-placement="top" title="Eliminar">
 													<i class="material-icons">delete</i>
 										</a>
-										<form id="delete_user" class="" action="{{ route('sectores.destroy', $d->id)}}" method="POST" style="display: none;">
+										<form id="delete_user" action="{{ route('sectores.destroy', $d->id)}}" method="POST" style="display: none;">
 											{{ method_field( 'DELETE' ) }}
 				              @csrf
 										</form>

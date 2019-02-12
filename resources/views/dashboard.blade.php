@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('header','Dashboard')
+@section('header','Inicio')
 @section('content')
 <div class="container-fluid">
   <div class="row">

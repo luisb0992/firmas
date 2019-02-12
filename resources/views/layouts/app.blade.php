@@ -56,7 +56,7 @@
           <li class="nav-item {{ Request::segment(1) === 'dashboard' ? 'active' : null }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
               <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
+              <p>Inicio</p>
             </a>
           </li>
 

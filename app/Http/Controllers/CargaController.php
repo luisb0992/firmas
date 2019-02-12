@@ -39,7 +39,43 @@ class CargaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+        //dd($request->all());
+        try {
+
+            $carga = new Carga;
+            $carga->fill($request->all());
+
+              $validation = Carga::where('sector_id',$request->sector_id)->where('hora_reporte',$request->hora_reporte)->exists();
+
+              if ($validation) {
+                  return redirect("cargas/create")->with([
+                      'flash_message' => 'Ya existe este reporte de esta hora, verifique.',
+                      'flash_class' => 'alert-warning'
+                      ]);
+              }else{
+
+                if($carga->save()){
+                return redirect("cargas")->with([
+                  'flash_message' => 'Carga agregada correctamente.',
+                  'flash_class' => 'alert-success'
+                  ]);
+                  }else{
+                    return redirect("cargas")->with([
+                      'flash_message' => 'Ha ocurrido un error.',
+                      'flash_class' => 'alert-danger',
+                      'flash_important' => true
+                      ]);
+                  }
+              }
+
+        }catch (Exception $e) {
+
+             return redirect("carga/create")->with([
+                  'flash_message' => 'Ha ocurrido un error intente de nuevo.',
+                  'flash_class' => 'alert-danger'
+                  ]);
+        }
     }
 
     /**

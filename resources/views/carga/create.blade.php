@@ -37,7 +37,7 @@
 							<br>
 							<div class="form-group {{ $errors->has('hora_reporte')?'has-error':'' }}">
 								<label class="control-label" for="user">Municipio: *</label>
-								<select class="form-control" name="hora_reporte" required="">
+								<select class="form-control" name="sector_id" required="">
 									<option value="">Seleccione....</option>
 									@foreach($municipios as $m)
 										<option value="{{$m->id}}">{{$m->municipio}}</option>

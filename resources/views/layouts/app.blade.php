@@ -28,6 +28,7 @@
   <!-- Datatables -->
   <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/DataTables-1.10.18/css/dataTables.jqueryui.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('plugins/datatables/Responsive-2.2.2/css/responsive.jqueryui.css')}}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 
 </head>
@@ -232,6 +233,12 @@
 
   <!-- js propio -->
   <script src="{{ asset('js/propio.js') }}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/variwide.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
   @yield('script')
 

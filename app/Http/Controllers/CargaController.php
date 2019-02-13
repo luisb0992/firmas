@@ -122,4 +122,62 @@ class CargaController extends Controller
     {
         //
     }
+
+    public function graficos()
+    {
+        $sectores = Sectores::all();
+       /* $carga = Carga::groupBy('sector_id') 
+               ->selectRaw('sum(total) as sum')
+               ->pluck('sum');*/
+
+              /* $carga = Carga::groupBy('sector_id') 
+               ->selectRaw('MAX(id) FROM carga GROUP BY sector_id')
+
+               ->pluck('sum');*/
+
+               $carga = DB::table('carga')
+                        ->whereIn('id', function($query)
+                        {
+                            $query->select(DB::raw('MAX(id) as sum'))
+                                  ->from('carga')
+                                  ->groupBy('sector_id');
+                        })->get(['total','sector_id']);
+                        //->pluck('total','sector_id');
+
+                       
+                        foreach ($carga as $s) {
+                          $d[] = Sectores::where('id',$s->sector_id)->first();
+                        }
+
+                        $union = $carga->union($d);
+
+                       // $ar = array_push($d,'manzana');
+
+                       /* $f = $carga->pluck('secstor_id')->each(function ($item, $key) {
+                                      return Sectores::where('id',$item)->pluck('nombre_sector');
+                                  });*/
+                       
+                       for ($i=0; $i < count($d) ; $i++) { 
+                         $a[] = $d[$i]->nombre_sector;
+                       }
+
+                       $suma = array_sum($carga->pluck('total')->toarray());
+
+//dd($a);
+               
+
+           /*    DB::table('carga')
+                     ->select(DB::raw('count(*) as user_count, status'))
+                     ->where('status', '<>', 1)
+                     ->groupBy('status')
+                     ->get();*/
+
+
+
+              // SELECT * FROM carga WHERE id IN ( SELECT MAX(id) FROM carga GROUP BY sector_id )
+
+
+       
+        return view('carga.graficos',['sectores'=>$a,'carga' => $carga->pluck('total')->toarray(),'suma'=>$suma]);
+    }
 }
